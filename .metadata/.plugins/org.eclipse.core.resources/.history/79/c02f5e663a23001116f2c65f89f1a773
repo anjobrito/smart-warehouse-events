@@ -1,0 +1,5 @@
+package com.org.smartwarehouse.service;
+
+public class OrderService {
+
+}

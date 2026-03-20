@@ -1,0 +1,5 @@
+package com.org.smartwarehouse.model;
+
+public class Order {
+
+}

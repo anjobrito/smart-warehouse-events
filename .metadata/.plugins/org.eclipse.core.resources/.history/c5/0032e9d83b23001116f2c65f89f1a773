@@ -1,0 +1,59 @@
+package com.org.smartwarehouse.controller;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.org.smartwarehouse.model.Order;
+import com.org.smartwarehouse.repository.OrderRepository;
+
+@RestController
+@RequestMapping("/orders")
+public class OrderController {
+
+    private final OrderRepository orderRepository;
+
+    public OrderController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    @GetMapping
+    public List<Order> listOrders() {
+        return orderRepository.findAll();
+    }
+
+    @PostMapping
+    public Order createOrder(@RequestBody Order order) {
+    	order.setCreatedAt(LocalDateTime.now());
+        return orderRepository.save(order);
+    }
+
+    @GetMapping("/{id}")
+    public Order getOrderById(@PathVariable Long id) {
+        Optional<Order> order = orderRepository.findById(id);
+        return order.orElse(null);
+    }
+
+    @PutMapping("/{id}")
+    public Order updateOrder(@PathVariable Long id, @RequestBody Order updatedOrder) {
+        Optional<Order> existingOrder = orderRepository.findById(id);
+
+        if (existingOrder.isPresent()) {
+            Order order = existingOrder.get();
+            order.setCustomerName(updatedOrder.getCustomerName());
+            order.setProductName(updatedOrder.getProductName());
+            order.setQuantity(updatedOrder.getQuantity());
+            order.setStatus(updatedOrder.getStatus());
+            return orderRepository.save(order);
+        }
+
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteOrder(@PathVariable Long id) {
+        orderRepository.deleteById(id);
+    }
+}

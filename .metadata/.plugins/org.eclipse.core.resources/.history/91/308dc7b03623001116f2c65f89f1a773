@@ -1,0 +1,17 @@
+package com.org.smartwarehouse.repository;
+
+
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+
+import com.org.smartwarehouse.model.Order;
+
+import jakarta.persistence.EntityManager;
+
+
+public class OrderRepository extends SimpleJpaRepository<Order, Long>{
+
+	public OrderRepository(Class<Order> domainClass, EntityManager entityManager) {
+		super(domainClass, entityManager);	
+	}
+
+}

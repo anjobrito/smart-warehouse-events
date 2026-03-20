@@ -1,0 +1,12 @@
+package com.org.smartwarehouse.service;
+
+import com.org.smartwarehouse.model.Order;
+
+public class OrderService {
+	
+	public Order createOrder(Order order) {
+		
+		return order;		
+	}
+
+}
