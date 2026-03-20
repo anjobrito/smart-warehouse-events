@@ -1,5 +1,0 @@
-package com.org.smartwarehouse.repository;
-
-public class OrderRepository extends JpaRepository<Order, Long>  {
-
-}

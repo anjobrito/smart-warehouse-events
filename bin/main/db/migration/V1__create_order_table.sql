@@ -1,9 +1,0 @@
-CREATE TABLE orders (
-    id BIGINT NOT NULL AUTO_INCREMENT,
-    customer_name VARCHAR(150) NOT NULL,
-    product_name VARCHAR(150) NOT NULL,
-    quantity INT NOT NULL,
-    status VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id)
-);
