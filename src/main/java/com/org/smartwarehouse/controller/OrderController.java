@@ -2,8 +2,16 @@ package com.org.smartwarehouse.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.org.smartwarehouse.dto.OrderDto;
 import com.org.smartwarehouse.model.Order;
 import com.org.smartwarehouse.service.OrderService;
 
@@ -23,7 +31,12 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody Order order) {
+    public Order createOrder(@RequestBody OrderDto dto) {
+    	   Order order = new Order();
+    	    order.setCustomerName(dto.getCustomerName());
+    	    order.setProductName(dto.getProductName());
+    	    order.setQuantity(dto.getQuantity());
+    	    order.setStatus(dto.getStatus());
         return orderService.createOrder(order);
     }
 
@@ -34,7 +47,13 @@ public class OrderController {
 
 
     @PutMapping("/{id}")
-    public Order updateOrder(@PathVariable("id") Long id, @RequestBody Order updatedOrder) {
+    public Order updateOrder(@PathVariable("id") Long id, @RequestBody OrderDto dto) {
+    	  Order updatedOrder = new Order();
+    	  updatedOrder.setCustomerName(dto.getCustomerName());
+    	  updatedOrder.setProductName(dto.getProductName());
+    	  updatedOrder.setQuantity(dto.getQuantity());
+    	  updatedOrder.setStatus(dto.getStatus());
+    	
         return orderService.updateOrder(id, updatedOrder);
     }
     

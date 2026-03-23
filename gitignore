@@ -1,0 +1,37 @@
+# Gradle
+/build/
+/.gradle/
+
+# Java
+*.class
+bin/
+
+# IDE
+.metadata/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+# IDE
+.metadata/
+bin/
+*.log
+*.class
+
+# IntelliJ (se usar depois)
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# Build
+build/
