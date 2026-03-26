@@ -2,18 +2,13 @@ package com.org.smartwarehouse.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.org.smartwarehouse.dto.OrderDto;
-import com.org.smartwarehouse.model.Order;
+import com.org.smartwarehouse.dto.OrderRequest;
+import com.org.smartwarehouse.dto.OrderResponse;
 import com.org.smartwarehouse.service.OrderService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/orders")
@@ -26,37 +21,25 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<Order> listOrders() {
+    public List<OrderResponse> listOrders() {
         return orderService.listOrders();
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody OrderDto dto) {
-    	   Order order = new Order();
-    	    order.setCustomerName(dto.getCustomerName());
-    	    order.setProductName(dto.getProductName());
-    	    order.setQuantity(dto.getQuantity());
-    	    order.setStatus(dto.getStatus());
-        return orderService.createOrder(order);
+    public OrderResponse createOrder(@Valid @RequestBody OrderRequest request) {
+        return orderService.createOrder(request);
     }
 
     @GetMapping("/{id}")
-    public Order getOrderById(@PathVariable("id") Long id) {
+    public OrderResponse getOrderById(@PathVariable("id") Long id) {
         return orderService.getOrderById(id);
     }
 
-
     @PutMapping("/{id}")
-    public Order updateOrder(@PathVariable("id") Long id, @RequestBody OrderDto dto) {
-    	  Order updatedOrder = new Order();
-    	  updatedOrder.setCustomerName(dto.getCustomerName());
-    	  updatedOrder.setProductName(dto.getProductName());
-    	  updatedOrder.setQuantity(dto.getQuantity());
-    	  updatedOrder.setStatus(dto.getStatus());
-    	
-        return orderService.updateOrder(id, updatedOrder);
+    public OrderResponse updateOrder(@Valid @PathVariable("id") Long id, @RequestBody OrderRequest request) {
+        return orderService.updateOrder(id, request);
     }
-    
+
     @DeleteMapping("/{id}")
     public void deleteOrder(@PathVariable("id") Long id) {
         orderService.deleteOrder(id);
